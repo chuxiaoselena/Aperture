@@ -1,4 +1,4 @@
-net: "/home/xchu/code/Apert/proto/train_val.prototxt"
+net: "/home/xchu/code/Apert/code/Aperture/proto/train_val.prototxt"
 test_iter: 100
 test_interval: 5000
 test_initialization: true
@@ -16,4 +16,4 @@ snapshot: 5000
 snapshot_prefix: "model/LSP"
 solver_mode: GPU
 debug_info: false
-device_id: [0,1,2,3]
+device_id: [0,1]

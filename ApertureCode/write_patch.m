@@ -18,7 +18,11 @@ for i = 1:length(data)
         Asize = Apsize(randi(length(Apsize)));
         Aperture = MaskPatch(cpatch(j).patch, Asize/2);
         imwrite(Aperture, imwt);
-        fprintf(fid,'%s %d\n',imwt, label{i}.global_id(j));
+        if ~isempty(label{i}.global_id)
+            fprintf(fid,'%s %d\n',imwt, label{i}.global_id(j));
+        else
+            fprintf(fid,'%s %d\n',imwt, 9699);
+        end
     end
 end
 fclose(fid);
