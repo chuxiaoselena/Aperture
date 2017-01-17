@@ -15,7 +15,7 @@ layer {
     mean_value: 128
   }
   data_param {
-    source: "/data1/Apert/code/Aperture/LSP/cache/lsp/LMDB_train"
+    source: "/data1/Apert/LSP/cache/lsp/LMDB_train"
     batch_size: 128
     backend: LMDB
   }
@@ -37,7 +37,7 @@ layer {
     mean_value: 128
   }
   data_param {
-    source: "/data2/Apert/code/Aperture/LSP/cache/lsp/LMDB_val"
+    source: "/data2/Apert/LSP/cache/lsp/LMDB_val"
     batch_size: 64
     backend: LMDB
   }
