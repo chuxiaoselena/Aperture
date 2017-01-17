@@ -1,21 +1,24 @@
-function write_patch(data, wt)
+function write_patch(data, label, wt, psize, phase)
 
-if ~isdir(wt), mkdir(wt); end
-fid = fopen('/data1/Apert/dataset/patch/val.txt','w');
-% tic;
-for i = 1:length(test)
+Apsize = [24 48 72 96 120, 144];
+if ~isdir([wt phase '/']), mkdir([wt phase '/']); end
+fid = fopen([wt phase '.txt'],'w');
+for i = 1:length(data)
     if mod(i, 100) == 0
-        %         toc;
-        fprintf(1, 'valid %d/%d\n', i, length(data));
-        %         tic;
+        fprintf(1, '%s %d/%d\n', i, length(data));
     end
-    im = imreadx(data(i));
-    patch = crop_part(im,data(i).box);
-    patch = imresize(patch, [psize, psize]);
-    Aperture = MaskPatch(patch, data(i).Asize/2);
-    
-    imdir = [wt sprintf('%06d.png',i)];
-    imwrite(Aperture,imdir);
-    fprintf(fid,'%s %d\n',imdir, data(i).label);
+    cpatch = crop_patch(data{i}, label{i}, psize);
+    if strcmp(phase,'train')
+        perm_idx = randperm(numel(train_imdata));
+        cpatch = cpatch(perm_idx);
+    end
+    for j = 1:length(cpatch)
+        imid = (i-1)*length(cpatch)+j;
+        imwt = sprintf('%s%s/%06d.png',wt,phase,imid);
+        Asize = Apsize(randi(length(Apsize)));
+        Aperture = MaskPatch(cpatch(j).patch, Asize/2);
+        imwrite(Aperture, imwt);
+        fprintf(fid,'%s %d\n',imwt, label{i}.global_id(j));
+    end
 end
 fclose(fid);
