@@ -1,4 +1,4 @@
-function [pos_train, pos_val, pos_test, neg_train, neg_val, tsize] = LSP_data()
+function [pos_train, pos_val, pos_test, tsize] = LSP_positive_data()
 conf = global_conf();
 pa = conf.pa;
 p_no = numel(pa);
@@ -83,29 +83,29 @@ catch
   
   % -------------------
   % grab neagtive image information
-  negims = '../../dataset/INRIA/%05d.jpg';
-  if ~exist('../../dataset/INRIA', 'dir')
-    error('Please downlad INRIA dataset');
-  end
-  num = numel(trainval_frs_neg);
-  neg = struct('im', cell(num, 1), 'joints', cell(num, 1), ...
-    'r_degree', cell(num, 1), 'isflip', cell(num,1));
-  
-  for ii = 1:num
-    fr = trainval_frs_neg(ii);
-    neg(ii).im = sprintf(negims,fr);
-    neg(ii).joints = [];
-    neg(ii).r_degree = 0;
-    neg(ii).isflip = 0;
-  end
-  % -------- flip negatives ----------
-  val_id = randperm(numel(neg), 500);
-  train_id = true(numel(neg), 1); train_id(val_id) = false;
-  neg_train = neg(train_id); neg_val = neg(val_id);
-  
-  neg_train = add_flip(neg_train, []);
-  neg_val = add_flip(neg_val, []);
-  save([cachedir cls],'pos_train','pos_val','pos_test','neg_train','neg_val','tsize');
+%   negims = './dataset/INRIA/%05d.jpg';
+%   if ~exist('./dataset/INRIA', 'dir')
+%     error('Please downlad INRIA dataset');
+%   end
+%   num = numel(trainval_frs_neg);
+%   neg = struct('im', cell(num, 1), 'joints', cell(num, 1), ...
+%     'r_degree', cell(num, 1), 'isflip', cell(num,1));
+%   
+%   for ii = 1:num
+%     fr = trainval_frs_neg(ii);
+%     neg(ii).im = sprintf(negims,fr);
+%     neg(ii).joints = [];
+%     neg(ii).r_degree = 0;
+%     neg(ii).isflip = 0;
+%   end
+%   % -------- flip negatives ----------
+%   val_id = randperm(numel(neg), 500);
+%   train_id = true(numel(neg), 1); train_id(val_id) = false;
+%   neg_train = neg(train_id); neg_val = neg(val_id);
+%   
+%   neg_train = add_flip(neg_train, []);
+%   neg_val = add_flip(neg_val, []);
+  save([cachedir cls],'pos_train','pos_val','pos_test','tsize');
 end
 
 
