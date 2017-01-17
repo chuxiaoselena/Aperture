@@ -1,3 +1,4 @@
+
 function prepare_aperture(pos_train, pos_val, neg_train, tsize)
 conf = global_conf();
 cachedir = conf.cachedir;
