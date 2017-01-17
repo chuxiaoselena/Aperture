@@ -37,7 +37,7 @@ for p = 1:p_no
     cen  = cell(1,R);
     sumdist = zeros(1,R);
     
-    parfor trial = 1:R
+    for trial = 1:R
       [gInd{trial}, cen{trial}, sumdist(trial)] = k_means(normX, K);
     end
     % take the smallest distance one
