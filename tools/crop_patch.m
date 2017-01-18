@@ -3,7 +3,7 @@ persistent NEG_N;
 
 if isempty(NEG_N)
   conf = global_conf();
-  NEG_N = conf.NEG_N;
+  NEG_N = 10;
 end
 
 RNG_MAX = 1e9 - 1;

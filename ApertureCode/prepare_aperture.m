@@ -27,9 +27,11 @@ train_labels = cat(1, num2cell(label_train), num2cell(dummy_label));
 
 % permute training items
 perm_idx1 = randperm(numel(train_imdata));
-perm_idx2 = randperm(numel(train_imdata));
-train_imdata = cat(1, train_imdata(perm_idx1), train_imdata(perm_idx2));
-train_labels = cat(1, train_labels(perm_idx1), train_labels(perm_idx2));
+% perm_idx2 = randperm(numel(train_imdata));
+% train_imdata = cat(1, train_imdata(perm_idx1), train_imdata(perm_idx2));
+% train_labels = cat(1, train_labels(perm_idx1), train_labels(perm_idx2));
+train_imdata = train_imdata(perm_idx1);
+train_labels = train_labels(perm_idx1);
 
 write_patch(train_imdata, train_labels, wt_dir,psize, 'train');
 

@@ -21,7 +21,7 @@ for i = 1:length(data)
         if ~isempty(label{i}.global_id)
             fprintf(fid,'%s %d\n',imwt, label{i}.global_id(j));
         else
-            fprintf(fid,'%s %d\n',imwt, 9699);
+            fprintf(fid,'%s 9699\n',imwt);
         end
     end
 end
