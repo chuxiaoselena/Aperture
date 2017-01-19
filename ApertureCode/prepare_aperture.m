@@ -33,5 +33,5 @@ perm_idx1 = randperm(numel(train_imdata));
 train_imdata = train_imdata(perm_idx1);
 train_labels = train_labels(perm_idx1);
 
-write_patch(train_imdata, train_labels, wt_dir,psize, 'train');
+write_patch(train_imdata, train_labels, wt_dir,psize, 'train1');
 

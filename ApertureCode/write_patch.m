@@ -8,7 +8,7 @@ for i = 1:length(data)
         fprintf('%s %d/%d\n', phase, i, length(data));
     end
     cpatch = crop_patch(data{i}, label{i}, psize);
-    if strcmp(phase,'train')
+    if strcmp(phase,'train1')
         perm_idx = randperm(numel(cpatch));
         cpatch = cpatch(perm_idx);
     end
