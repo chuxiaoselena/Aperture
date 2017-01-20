@@ -8,7 +8,8 @@ cachedir = conf.cachedir;
 label_name = sprintf('%s_labels_K%d.mat', note, conf.K);
 
 try
-  load([cachedir label_name]);
+    load notfound;
+%   load([cachedir label_name]);
 catch
   % assign mix
   labels = assign_label(imdata, clusters, pa, tsize, conf.K);

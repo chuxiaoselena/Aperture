@@ -9,7 +9,7 @@ psize = [150 150];
 wt_dir = '../../dataset/patch/';
 
 %% validation data
-if 0
+if 1
 label_val = derive_labels('val', clusters, pos_val, tsize);
 val_imdata = num2cell(pos_val);
 val_labels = num2cell(label_val);
