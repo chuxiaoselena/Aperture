@@ -15,7 +15,7 @@ layer {
     mean_value: 128
   }
   data_param {
-    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/train_lmdb"
+    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/train_lmdb_26"
     batch_size: 128
     backend: LMDB
   }
@@ -37,7 +37,7 @@ layer {
     mean_value: 128
   }
   data_param {
-    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/val"
+    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/val_lmdb_26"
     batch_size: 64
     backend: LMDB
   }
@@ -453,7 +453,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 4096
+    num_output: 1024
     weight_filler {
       type: "gaussian"
       std: 0.001
@@ -499,7 +499,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 4096
+    num_output:1024
     weight_filler {
       type: "gaussian"
       std: 0.001
@@ -541,7 +541,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 9699
+    num_output: 27
     weight_filler {
       type: "gaussian"
       std: 0.001

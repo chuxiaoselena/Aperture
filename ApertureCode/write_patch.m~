@@ -8,7 +8,7 @@ for i = 1:length(data)
         fprintf('%s %d/%d\n', phase, i, length(data));
     end
     cpatch = crop_patch(data{i}, label{i}, psize);
-    if strcmp(phase,'train1')
+    if strcmp(phase,'train')
         perm_idx = randperm(numel(cpatch));
         cpatch = cpatch(perm_idx);
     end
@@ -19,10 +19,9 @@ for i = 1:length(data)
         Aperture = MaskPatch(cpatch(j).patch, Asize/2);
         imwrite(Aperture, imwt);
         if ~isempty(label{i}.global_id)
-            fprintf(fid,'%s %d\n',imwt, label{i}.global_id(j));
+        fprintf(fid,'%s %d\n',imwt, label{i}.global_id(j));
         else
-            fprintf(fid,'%s 9699\n',imwt);
-        end
+            
     end
 end
 fclose(fid);
