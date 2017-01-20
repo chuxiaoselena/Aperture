@@ -10,11 +10,12 @@ wt_dir = '../../dataset/patch/';
 
 %% validation data
 if 1
-label_val = derive_labels('val', clusters, pos_val, tsize);
-val_imdata = num2cell(pos_val);
-val_labels = num2cell(label_val);
-
-write_patch(val_imdata, val_labels, wt_dir, psize, 'val');
+    label_val = derive_labels('val', clusters, pos_val, tsize);
+    val_imdata = num2cell(pos_val);
+    val_labels = num2cell(label_val);
+    
+    write_patch(val_imdata, val_labels, wt_dir, psize, 'val');
+    
 end
 
 %% generate dummy labels for negative images

@@ -2,61 +2,61 @@ function cpatch = crop_patch(imdata, label, psize)
 persistent NEG_N;
 
 if isempty(NEG_N)
-  conf = global_conf();
-  NEG_N = 10;
+    conf = global_conf();
+    NEG_N = 10;
 end
 
 RNG_MAX = 1e9 - 1;
 is_negative = isempty(imdata.joints);
 
 if ~is_negative
-  % negative images
-  joints = imdata.joints;
-  scale_x = imdata.scale_x;
-  scale_y = imdata.scale_y;
-  glabel = label.global_id;
-  
-  if isfield(label, 'invalid')
-    invalid = label.invalid;
-  else
-    invalid = false(size(joints,1), 1);
-  end
-  valid_ps = find(~invalid);
-  p_no = numel(valid_ps);
-  
-  cpatch = struct('patch', cell(p_no, 1), 'label', cell(p_no, 1), 'rngkey', cell(p_no, 1));
-  
-  im = imreadx(imdata);
-  
-  for ii = 1:p_no
-    pid = valid_ps(ii);
-    bbx = [joints(pid,1)-scale_x, joints(pid,2)-scale_y, ...
-      joints(pid,1)+scale_x, joints(pid,2)+scale_y];
-    bbx = round(bbx);
-    crop_im = subarray(im, bbx(2),bbx(4),bbx(1),bbx(3),1);
-    crop_im = imresize(crop_im, psize);
+    % negative images
+    joints = imdata.joints;
+    scale_x = imdata.scale_x;
+    scale_y = imdata.scale_y;
+    glabel = label.global_id;
     
-    cpatch(ii).patch = crop_im;
+    if isfield(label, 'invalid')
+        invalid = label.invalid;
+    else
+        invalid = false(size(joints,1), 1);
+    end
+    valid_ps = find(~invalid);
+    p_no = numel(valid_ps);
     
-    cpatch(ii).label = int32(glabel(pid));
-    cpatch(ii).rngkey = randi(RNG_MAX,1,'int32');
-  end
+    cpatch = struct('patch', cell(p_no, 1), 'label', cell(p_no, 1), 'rngkey', cell(p_no, 1));
+    
+    im = imreadx(imdata);
+    
+    for ii = 1:p_no
+        pid = valid_ps(ii);
+        bbx = [joints(pid,1)-scale_x, joints(pid,2)-scale_y, ...
+            joints(pid,1)+scale_x, joints(pid,2)+scale_y];
+        bbx = round(bbx);
+        crop_im = subarray(im, bbx(2),bbx(4),bbx(1),bbx(3),1);
+        crop_im = imresize(crop_im, psize);
+        
+        cpatch(ii).patch = crop_im;
+        
+        cpatch(ii).label = int32(glabel(pid));
+        cpatch(ii).rngkey = randi(RNG_MAX,1,'int32');
+    end
 else
-  % ------ sample N negatives from each negative images ----
-  % negative images
-  im = imreadx(imdata);
-  neg_bbx = sample_negative(im, psize, NEG_N);
-  b_n = size(neg_bbx, 1);
-  cpatch = struct('patch', cell(b_n, 1), 'label', cell(b_n,1), 'rngkey', cell(b_n,1));
-  
-  for ii = 1:b_n
-    crop_im = subarray(im, ...
-      neg_bbx(ii,2),neg_bbx(ii,4),neg_bbx(ii,1),neg_bbx(ii,3),1);
-    assert(size(crop_im,1) == psize(1) && size(crop_im,2) == psize(2));
-    cpatch(ii).patch = crop_im;
-    cpatch(ii).label = int32(0);           % negative label
-    cpatch(ii).rngkey = randi(RNG_MAX,1,'int32');
-  end
+    % ------ sample N negatives from each negative images ----
+    % negative images
+    im = imreadx(imdata);
+    neg_bbx = sample_negative(im, psize, NEG_N);
+    b_n = size(neg_bbx, 1);
+    cpatch = struct('patch', cell(b_n, 1), 'label', cell(b_n,1), 'rngkey', cell(b_n,1));
+    
+    for ii = 1:b_n
+        crop_im = subarray(im, ...
+            neg_bbx(ii,2),neg_bbx(ii,4),neg_bbx(ii,1),neg_bbx(ii,3),1);
+        assert(size(crop_im,1) == psize(1) && size(crop_im,2) == psize(2));
+        cpatch(ii).patch = crop_im;
+        cpatch(ii).label = int32(0);           % negative label
+        cpatch(ii).rngkey = randi(RNG_MAX,1,'int32');
+    end
 end
 
 function neg_bbx = sample_negative(im, psize, N)
