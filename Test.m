@@ -9,6 +9,7 @@ cachedir = conf.cachedir;
 modeldir = '../../model/LSP_iter_11500.caffemodel';
 deploydir = 'proto/highdim/deploy.prototxt';
 use_gpu = 1; gpu_id = 1;
+caffe.reset_all();
 net=matcaffe_init(use_gpu, model_def_file, model_file,gpu_id);
 Apsize = [24 48 72 96 120, 144];
 pos_test = LSP_test_data();
