@@ -16,7 +16,7 @@ layer {
   }
   data_param {
     source: "/home/xchu/code/Apert/dataset/lsp_lmdb/train_lmdb"
-    batch_size: 128
+    batch_size: 64
     backend: LMDB
   }
 }
@@ -37,8 +37,8 @@ layer {
     mean_value: 128
   }
   data_param {
-    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/val"
-    batch_size: 64
+    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/valid"
+    batch_size: 32
     backend: LMDB
   }
 }

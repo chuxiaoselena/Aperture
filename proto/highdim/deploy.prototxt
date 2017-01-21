@@ -1,47 +1,10 @@
-name: "VGG_conv5_basic"
-#-------------- Train data -----------------
-layer {
-  name: "data"
-  type: "Data"
-  top: "data"
-  top: "label"
-  include {
-    phase: TRAIN
-  }
-  transform_param {
-    mirror: false
-    mean_value: 128
-    mean_value: 128
-    mean_value: 128
-  }
-  data_param {
-    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/train_lmdb"
-    batch_size: 128
-    backend: LMDB
-  }
-}
+name: "VGG_aperture"
 
-#-------------- TEST -----------------------
-layer {
-  name: "data"
-  type: "Data"
-  top: "data"
-  top: "label"
-  include {
-    phase: TEST
-  }
-  transform_param {
-    mirror: false
-    mean_value: 128
-    mean_value: 128
-    mean_value: 128
-  }
-  data_param {
-    source: "/home/xchu/code/Apert/dataset/lsp_lmdb/val"
-    batch_size: 64
-    backend: LMDB
-  }
-}
+input: "data"
+input_dim: 1
+input_dim: 3
+input_dim: 150
+input_dim: 150
 
 ####################################################
 #-------------- conv 1 ---------------
@@ -555,24 +518,11 @@ layer {
 
 
 
-layer {
-  name: "accuracy"
-  type: "Accuracy"
-  bottom: "pred"
- bottom: "label"
- top: "accuracy"
- include {
-   phase: TEST
- }
-}
-
-
 
 layer {
   name: "loss"
-  type: "SoftmaxWithLoss"
+  type: "Softmax"
   bottom: "pred"
-  bottom: "label"
   top: "loss"
 }
 

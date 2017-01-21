@@ -1,10 +1,10 @@
 net: "/home/xchu/code/Apert/code/Aperture/proto/train_val.prototxt"
 test_iter: 100
-test_interval: 1000
+test_interval: 5000
 test_initialization: true
 display:40
 average_loss: 40
-base_lr: 0.0001
+base_lr: 0.001
 lr_policy: "step"
 stepsize: 1000000
 gamma: 0.1
@@ -12,8 +12,8 @@ max_iter: 3000000
 momentum: 0.9
 iter_size: 1
 weight_decay: 0.0005
-snapshot: 1000
-snapshot_prefix: "/data1/Apert/model/TuneAp/Ap"
+snapshot: 5000
+snapshot_prefix: "model/LSP"
 solver_mode: GPU
 debug_info: false
 device_id: [0,1]
