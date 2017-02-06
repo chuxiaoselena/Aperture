@@ -14,6 +14,10 @@ deploydir = 'proto/highdim/deploy.prototxt';
 % net = caffe.Net(deploydir, modeldir, 'test');
 
 % net=matcaffe_init(use_gpu, deploydir, modeldir,gpu_id);
+load('../../res/Aperture/global_id.mat');
+for i = 1:length(global_IDs)
+    range(i).end = max(max(max(global_IDs{i})));
+end
 Apsize = [24 48 72 96 120, 144];
 pos_test = LSP_test_data();
 label = 1:26;
@@ -30,5 +34,5 @@ for i = 1:length(pos_test)
         end
     end
     scores = AperturePredict(Aperture, net);
-    Acc{i} = CalApertureAccuracy(scores,label);
+    Acc{i} = CalApertureAccuracy(scores,label,range,length(Apsize), length(cpatch)); 
 end
