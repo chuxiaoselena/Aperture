@@ -3,8 +3,8 @@ name: "VGG_aperture"
 input: "data"
 input_dim: 1
 input_dim: 3
-input_dim: 150
-input_dim: 150
+input_dim: 36
+input_dim: 36
 
 ####################################################
 #-------------- conv 1 ---------------

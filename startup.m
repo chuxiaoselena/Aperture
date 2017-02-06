@@ -5,12 +5,13 @@ function startup
 
 if ~isdeployed
   addpath('./dataio');
-  addpath('./bin');
+%   addpath('./bin');
   addpath('./evaluation');
   addpath('./visualization');
   addpath('./src');
   addpath('./tools');
   addpath('./ApertureCode');
+  addpath('/home/xchu/code/caffe/matlab');
   
 %   addpath('./external/qpsolver');
   % path to DCNN library, e.g., caffe

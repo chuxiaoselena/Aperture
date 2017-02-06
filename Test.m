@@ -8,10 +8,10 @@ p_no = numel(pa);
 cachedir = conf.cachedir;
 modeldir = '../../model/LSP_iter_115000.caffemodel';
 deploydir = 'proto/highdim/deploy.prototxt';
-caffe.reset_all();
-caffe.set_mode_gpu();
-caffe.set_device(1);
-net = caffe.Net(deploydir, modeldir, 'test');
+% caffe.reset_all();
+% caffe.set_mode_gpu();
+% caffe.set_device(1);
+% net = caffe.Net(deploydir, modeldir, 'test');
 
 % net=matcaffe_init(use_gpu, deploydir, modeldir,gpu_id);
 Apsize = [24 48 72 96 120, 144];
@@ -25,7 +25,7 @@ for i = 1:length(pos_test)
     cpatch = crop_patch_test(pos_test(i), [150 150]);
     for n = 1:length(cpatch)
         for m = 1:length(Apsize)
-            id = (n-1)*length(Asize)+m;
+            id = (n-1)*length(Apsize)+m;
             Aperture{id} = MaskPatch(cpatch(n).patch, Apsize(m));
         end
     end

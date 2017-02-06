@@ -1,6 +1,6 @@
 function pos_test = LSP_test_data()
 
-saveconfig = '../../res/lsp/TestWithScale.mat';
+saveconfig = '../../cache/lsp/TestWithScale.mat';
 conf = global_conf();
 pa = conf.pa;
 p_no = numel(pa);
